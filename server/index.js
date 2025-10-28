@@ -31,6 +31,7 @@ const initializeNews = async () => {
   try {
     console.log("📰 Fetching initial news data...");
     await axios.post(`http://localhost:${PORT}/api/news/fetch`);
+    await axios.delete(`http://localhost:${PORT}/api/news/delete`);
     console.log("✅ Initial news data loaded!");
   } catch (error) {
     console.error("❌ Failed to fetch initial news:", error.message);
@@ -43,6 +44,7 @@ const startNewsSync = () => {
     try {
       console.log("🔄 Syncing news...");
       await axios.post(`http://localhost:${PORT}/api/news/fetch`);
+      await axios.delete(`http://localhost:${PORT}/api/news/delete`);
       console.log("✅ News synced successfully!");
     } catch (error) {
       console.error("❌ Failed to sync news:", error.message);

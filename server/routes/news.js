@@ -82,15 +82,15 @@ router.get("/news", async (req, res) => {
 });
 
 //Deleting valorant news
-router.delete("/news", async (req, res) => {
+router.delete("/news/delete", async (req, res) => {
   try {
     const fiveDays = new Date();
-    fiveDays.setDate(fiveDays.getDate() - 5);
+    fiveDays.setDate(fiveDays.getDate() - 7);
 
     const { data, error } = await supabase
       .from("news_articles")
       .delete()
-      .lt("date", fiveDays.toISOString); //lt -> less than
+      .lt("created_at", fiveDays.toISOString()); //lt -> less than
 
     if (error) {
       console.log("Error deleting data from Supabase:", error);

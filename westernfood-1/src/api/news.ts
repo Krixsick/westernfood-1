@@ -12,30 +12,11 @@ const getValorantNews = async (): Promise<NewsArticle[]> => {
   return response.data;
 };
 
-// Trigger backend to fetch fresh news from Valorant API
-const fetchFreshNews = async () => {
-  const response = await apiClient.post("/news/fetch");
-  return response.data;
-};
-
 // Hook to display news
 export const useGetValorantNews = () => {
   return useQuery({
     queryKey: ["valorant-news"],
     queryFn: getValorantNews,
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
-  });
-};
-
-// Hook to manually refresh news from Valorant API
-export const useFetchFreshNews = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: fetchFreshNews,
-    onSuccess: () => {
-      // Refresh the news list after fetching
-      queryClient.invalidateQueries({ queryKey: ["valorant-news"] });
-    },
   });
 };

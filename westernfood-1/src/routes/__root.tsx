@@ -7,8 +7,14 @@ const RootLayout = () => (
       <Link to="/" className="[&.active]:font-bold">
         Home
       </Link>{" "}
-      <Link to="/teams" className="[&.active]:font-bold">
-        Teams
+      <Link to="/news" className="[&.active]:font-bold">
+        News
+      </Link>{" "}
+      <Link to="/stats" className="[&.active]:font-bold">
+        Stats
+      </Link>{" "}
+      <Link to="/rankings" className="[&.active]:font-bold">
+        Ranks
       </Link>{" "}
     </div>
     <hr />

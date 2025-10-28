@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useGetValorantNews } from "../api/news";
 import { type NewsArticle } from "../api/valorantTypes";
 
-export const Route = createFileRoute("/teams")({
+export const Route = createFileRoute("/news")({
   component: RouteComponent,
 });
 
