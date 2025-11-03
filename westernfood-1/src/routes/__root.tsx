@@ -16,6 +16,12 @@ const RootLayout = () => (
       <Link to="/rankings" className="[&.active]:font-bold">
         Ranks
       </Link>{" "}
+      <Link to="/matches" className="[&.active]:font-bold">
+        Matches
+      </Link>{" "}
+      <Link to="/events" className="[&.active]:font-bold">
+        Events
+      </Link>{" "}
     </div>
     <hr />
     <Outlet />

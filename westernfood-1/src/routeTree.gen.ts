@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as StatsRouteImport } from './routes/stats'
 import { Route as RankingsRouteImport } from './routes/rankings'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as MatchesRouteImport } from './routes/matches'
+import { Route as EventsRouteImport } from './routes/events'
 import { Route as IndexRouteImport } from './routes/index'
 
 const StatsRoute = StatsRouteImport.update({
@@ -29,6 +31,16 @@ const NewsRoute = NewsRouteImport.update({
   path: '/news',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MatchesRoute = MatchesRouteImport.update({
+  id: '/matches',
+  path: '/matches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +49,16 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/events': typeof EventsRoute
+  '/matches': typeof MatchesRoute
   '/news': typeof NewsRoute
   '/rankings': typeof RankingsRoute
   '/stats': typeof StatsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/events': typeof EventsRoute
+  '/matches': typeof MatchesRoute
   '/news': typeof NewsRoute
   '/rankings': typeof RankingsRoute
   '/stats': typeof StatsRoute
@@ -50,20 +66,31 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/events': typeof EventsRoute
+  '/matches': typeof MatchesRoute
   '/news': typeof NewsRoute
   '/rankings': typeof RankingsRoute
   '/stats': typeof StatsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/news' | '/rankings' | '/stats'
+  fullPaths: '/' | '/events' | '/matches' | '/news' | '/rankings' | '/stats'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/news' | '/rankings' | '/stats'
-  id: '__root__' | '/' | '/news' | '/rankings' | '/stats'
+  to: '/' | '/events' | '/matches' | '/news' | '/rankings' | '/stats'
+  id:
+    | '__root__'
+    | '/'
+    | '/events'
+    | '/matches'
+    | '/news'
+    | '/rankings'
+    | '/stats'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EventsRoute: typeof EventsRoute
+  MatchesRoute: typeof MatchesRoute
   NewsRoute: typeof NewsRoute
   RankingsRoute: typeof RankingsRoute
   StatsRoute: typeof StatsRoute
@@ -92,6 +119,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/matches': {
+      id: '/matches'
+      path: '/matches'
+      fullPath: '/matches'
+      preLoaderRoute: typeof MatchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +145,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EventsRoute: EventsRoute,
+  MatchesRoute: MatchesRoute,
   NewsRoute: NewsRoute,
   RankingsRoute: RankingsRoute,
   StatsRoute: StatsRoute,
